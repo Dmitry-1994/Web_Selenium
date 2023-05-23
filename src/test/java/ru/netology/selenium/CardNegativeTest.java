@@ -27,15 +27,40 @@ public class CardNegativeTest {
     }
 
     @Test
-    void nameTest_1() {
+    void emptyFieldName() {
+        driver.get("http://localhost:9999/");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79122518775");
+        driver.findElement(By.className("checkbox__box")).click();
+        driver.findElement(By.tagName("button")).click();
+
+        String expected = "Поле обязательно для заполнения";
+        String actual = driver.findElement(By.cssSelector("[data-test-id='name'] span.input__sub")).getText();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void emptyFieldPhone() {
         driver.get("http://localhost:9999/");
         driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Дмитрий");
-        //driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79122518775");
         driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.tagName("button")).click();
 
         String expected = "Поле обязательно для заполнения";
         String actual = driver.findElement(By.cssSelector("[data-test-id='phone'] span.input__sub")).getText().trim();
+
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    void emptyFieldAgree() {
+        driver.get("http://localhost:9999/");
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Дмитрий");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79122518775");
+        //driver.findElement(By.className("checkbox__box")).click();
+        driver.findElement(By.tagName("button")).click();
+
+        String expected = "rgba(255, 92, 92, 1)";
+        String actual = driver.findElement(By.cssSelector("[data-test-id='agreement'].input_invalid")).getCssValue("color");
 
         Assertions.assertEquals(expected, actual);
     }
