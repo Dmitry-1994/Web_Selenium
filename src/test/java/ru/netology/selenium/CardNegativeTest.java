@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class CardNegativeTest {
     private WebDriver driver;
@@ -15,10 +16,10 @@ public class CardNegativeTest {
 
     @BeforeEach
     void startDriver() {
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--disable-dev-shm-usage");
-//        options.addArguments("--no-sandbox");
-//        options.addArguments("--headless");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--headless");
         driver = new ChromeDriver();
     }
 
@@ -31,8 +32,6 @@ public class CardNegativeTest {
     @Test
     void emptyFieldAll() {
         driver.get("http://localhost:9999/");
-        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79122518775");
-        driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.tagName("button")).click();
 
         String expectedText = "Поле обязательно для заполнения";
@@ -63,7 +62,7 @@ public class CardNegativeTest {
     @Test
     void invalidNameByLanguage() {
         driver.get("http://localhost:9999/");
-        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Дмитрий Tarasov");
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Dima");
         driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79122518775");
         driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.tagName("button")).click();
