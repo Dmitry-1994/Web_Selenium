@@ -1,6 +1,8 @@
 package ru.netology.selenium;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -59,6 +61,10 @@ public class CardNegativeTest {
         Assertions.assertEquals(expectedColor, actualColor);
     }
 
+//    @ParameterizedTest
+//    @CsvSource({
+//            "Dima"
+//    })
     @Test
     void invalidNameByLanguage() {
         driver.get("http://localhost:9999/");
