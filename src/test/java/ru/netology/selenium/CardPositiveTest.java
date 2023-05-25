@@ -1,5 +1,6 @@
 package ru.netology.selenium;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +12,7 @@ public class CardPositiveTest {
 
     @BeforeAll
     static void setupAll() {
-        System.setProperty("webdriver.chrome.driver", "./driver/win/chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
     }
 
     @BeforeEach
@@ -26,7 +27,7 @@ public class CardPositiveTest {
     @AfterEach
     void engDriver() {
         driver.quit();
-        driver = null;
+        //driver = null;
     }
 
     @Test

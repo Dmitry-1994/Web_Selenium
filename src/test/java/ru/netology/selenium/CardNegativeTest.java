@@ -1,5 +1,6 @@
 package ru.netology.selenium;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -13,7 +14,7 @@ public class CardNegativeTest {
 
     @BeforeAll
     static void setupAll() {
-        System.setProperty("webdriver.chrome.driver", "./driver/win/chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
     }
 
     @BeforeEach
@@ -28,7 +29,7 @@ public class CardNegativeTest {
     @AfterEach
     void engDriver() {
         driver.quit();
-        driver = null;
+        //driver = null;
     }
 
     @Test
@@ -68,6 +69,7 @@ public class CardNegativeTest {
     @Test
     void invalidNameByLanguage() {
         driver.get("http://localhost:9999/");
+        //driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys(name);
         driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Dima");
         driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79122518775");
         driver.findElement(By.className("checkbox__box")).click();
