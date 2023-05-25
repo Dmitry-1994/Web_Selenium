@@ -23,13 +23,13 @@ public class CardNegativeTest {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
         options.addArguments("--headless");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
     }
 
     @AfterEach
     void engDriver() {
         driver.quit();
-        //driver = null;
+        driver = null;
     }
 
     @Test
@@ -62,32 +62,16 @@ public class CardNegativeTest {
         Assertions.assertEquals(expectedColor, actualColor);
     }
 
-//    @ParameterizedTest
-//    @CsvSource({
-//            "Dima"
-//    })
-    @Test
-    void invalidNameByLanguage() {
+    @ParameterizedTest
+    @CsvSource({
+            "Dima",
+            "Дмитрий_Tarasov",
+            "!Дмитрий",
+            "Дмитрий007"
+    })
+    void invalidName(String name) {
         driver.get("http://localhost:9999/");
-        //driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys(name);
-        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Dima");
-        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79122518775");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.tagName("button")).click();
-
-        String expectedText = "Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.";
-        String expectedColor = "rgba(255, 92, 92, 1)";
-        String actualText = driver.findElement(By.cssSelector("[class].input_invalid span.input__sub")).getText().trim();
-        String actualColor = driver.findElement(By.cssSelector("[class].input_invalid")).getCssValue("color");
-
-        Assertions.assertEquals(expectedText, actualText);
-        Assertions.assertEquals(expectedColor, actualColor);
-    }
-
-    @Test
-    void invalidNameBySpecialCharacters() {
-        driver.get("http://localhost:9999/");
-        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Дмитрий_Tarasov");
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys(name);
         driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79122518775");
         driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.tagName("button")).click();
@@ -117,28 +101,20 @@ public class CardNegativeTest {
         Assertions.assertEquals(expectedColor, actualColor);
     }
 
-    @Test
-    void invalidPhoneByNoPlus() {
+    @ParameterizedTest
+    @CsvSource({
+            "+791225187755",
+            "+7912251877",
+            "+7",
+            "+",
+            "89122518775",
+            "@79122518775",
+            "Дмитрий"
+    })
+    void invalidPhone(String namber) {
         driver.get("http://localhost:9999/");
         driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Дмитрий");
-        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("79122518775");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.tagName("button")).click();
-
-        String expectedText = "Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.";
-        String expectedColor = "rgba(255, 92, 92, 1)";
-        String actualText = driver.findElement(By.cssSelector("[class].input_invalid span.input__sub")).getText().trim();
-        String actualColor = driver.findElement(By.cssSelector("[class].input_invalid")).getCssValue("color");
-
-        Assertions.assertEquals(expectedText, actualText);
-        Assertions.assertEquals(expectedColor, actualColor);
-    }
-
-    @Test
-    void invalidPhoneByCount() {
-        driver.get("http://localhost:9999/");
-        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Дмитрий");
-        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+7912251877");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys(namber);
         driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.tagName("button")).click();
 
