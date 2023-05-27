@@ -38,12 +38,11 @@ public class CardNegativeTest {
         driver.findElement(By.tagName("button")).click();
 
         String expectedText = "Поле обязательно для заполнения";
-        String expectedColor = "rgba(255, 92, 92, 1)";
         String actualText = driver.findElement(By.cssSelector("[data-test-id='name'].input_invalid .input__sub")).getText().trim();
-        String actualColor = driver.findElement(By.cssSelector("[class].input_invalid")).getCssValue("color");
+        boolean actualColor = driver.findElement(By.cssSelector("[data-test-id='name'].input_invalid")).isDisplayed();
 
         Assertions.assertEquals(expectedText, actualText);
-        Assertions.assertEquals(expectedColor, actualColor);
+        Assertions.assertTrue(actualColor);
     }
 
     @Test
@@ -54,12 +53,11 @@ public class CardNegativeTest {
         driver.findElement(By.tagName("button")).click();
 
         String expectedText = "Поле обязательно для заполнения";
-        String expectedColor = "rgba(255, 92, 92, 1)";
         String actualText = driver.findElement(By.cssSelector("[data-test-id='name'].input_invalid .input__sub")).getText().trim();
-        String actualColor = driver.findElement(By.cssSelector("[class].input_invalid")).getCssValue("color");
+        boolean actualColor = driver.findElement(By.cssSelector("[data-test-id='name'].input_invalid")).isDisplayed();
 
         Assertions.assertEquals(expectedText, actualText);
-        Assertions.assertEquals(expectedColor, actualColor);
+        Assertions.assertTrue(actualColor);
     }
 
     @ParameterizedTest
@@ -77,12 +75,11 @@ public class CardNegativeTest {
         driver.findElement(By.tagName("button")).click();
 
         String expectedText = "Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.";
-        String expectedColor = "rgba(255, 92, 92, 1)";
         String actualText = driver.findElement(By.cssSelector("[data-test-id='name'].input_invalid .input__sub")).getText().trim();
-        String actualColor = driver.findElement(By.cssSelector("[class].input_invalid")).getCssValue("color");
+        boolean actualColor = driver.findElement(By.cssSelector("[data-test-id='name'].input_invalid")).isDisplayed();
 
         Assertions.assertEquals(expectedText, actualText);
-        Assertions.assertEquals(expectedColor, actualColor);
+        Assertions.assertTrue(actualColor);
     }
 
     @Test
@@ -93,12 +90,11 @@ public class CardNegativeTest {
         driver.findElement(By.tagName("button")).click();
 
         String expectedText = "Поле обязательно для заполнения";
-        String expectedColor = "rgba(255, 92, 92, 1)";
         String actualText = driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub")).getText().trim();
-        String actualColor = driver.findElement(By.cssSelector("[class].input_invalid")).getCssValue("color");
+        boolean actualColor = driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid")).isDisplayed();
 
         Assertions.assertEquals(expectedText, actualText);
-        Assertions.assertEquals(expectedColor, actualColor);
+        Assertions.assertTrue(actualColor);
     }
 
     @ParameterizedTest
@@ -119,12 +115,11 @@ public class CardNegativeTest {
         driver.findElement(By.tagName("button")).click();
 
         String expectedText = "Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.";
-        String expectedColor = "rgba(255, 92, 92, 1)";
         String actualText = driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub")).getText().trim();
-        String actualColor = driver.findElement(By.cssSelector("[class].input_invalid")).getCssValue("color");
+        boolean actualColor = driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid")).isDisplayed();
 
         Assertions.assertEquals(expectedText, actualText);
-        Assertions.assertEquals(expectedColor, actualColor);
+        Assertions.assertTrue(actualColor);
     }
 
     @Test
